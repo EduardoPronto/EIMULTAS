@@ -24,7 +24,7 @@ a{color:inherit;text-decoration:none} img{max-width:100%;display:block}
   flex-shrink:0;
 }
 .brand img{
-  height:96px;
+  height:110px;
   width:auto;
   object-fit:contain;
   background:transparent;
