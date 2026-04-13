@@ -5,104 +5,218 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>EiMultas | Especialistas em Recursos de Multas de Trânsito</title>
   <meta name="description" content="A EiMultas é especialista em recursos de multas de trânsito. Reduza ou elimine suas multas com quem realmente entende da lei." />
-  <meta name="theme-color" content="#0b4f8a" />
+  <meta name="theme-color" content="#ffffff" />
   <link rel="icon" href="assets/favicon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
   <style>
+    /* --- FORÇANDO O TEMA CLARO (SOBREPONDO O STYLES.CSS) --- */
+    
+    body, html {
+      background-color: #ffffff !important;
+      background-image: none !important;
+      color: #07192e !important;
+    }
+
+    /* Esconder os efeitos de luz/gradiente do fundo escuro */
+    .bg-orb {
+      display: none !important;
+    }
+
+    /* Cabeçalho */
+    .site-header {
+      background-color: #ffffff !important;
+      background-image: none !important;
+      border-bottom: 1px solid #e2eaf3 !important;
+    }
+    .nav-links a {
+      color: #07192e !important;
+    }
+
+    /* Seção Hero */
+    .hero {
+      background-color: #ffffff !important;
+      background-image: none !important;
+    }
+    .eyebrow {
+      color: #8a9ab0 !important;
+    }
     .hero-copy h1 {
       font-family: 'Inter', sans-serif;
       font-size: clamp(2.6rem, 5vw, 4.2rem);
       font-weight: 800;
       line-height: 1.07;
       letter-spacing: -.025em;
-      color: #ffffff;
+      color: #07192e !important;
       margin-bottom: 20px;
     }
-    .hero-copy h1 em { font-style: normal; color: #f5820a; }
+    .hero-copy h1 em {
+      font-style: normal;
+      color: #f5820a !important; 
+    }
+    .hero-copy .lead {
+      color: #555555 !important;
+    }
+
+    /* Itens de prova (os bloquinhos abaixo dos botões) */
+    .hero-proof {
+      background: transparent !important;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .proof-item {
+      background: #f4f6f9 !important;
+      border: 1px solid #e2eaf3 !important;
+      border-radius: 12px;
+      padding: 12px 16px;
+      display: flex; align-items: center; gap: 12px;
+    }
     .proof-icon {
       width: 36px; height: 36px; border-radius: 50%;
-      background: rgba(255,255,255,.1);
+      background: #e2eaf3 !important;
+      color: #07192e !important;
       display: flex; align-items: center; justify-content: center;
       font-size: 1rem; flex-shrink: 0;
     }
-    .proof-item { display: flex; align-items: flex-start; gap: 12px; }
-    .proof-item strong { display: block; color: #fff; font-size: .88rem; font-weight: 600; }
-    .proof-item span   { color: rgba(255,255,255,.55); font-size: .78rem; }
-    .section-navy { background: #07192e; color: #fff; }
+    .proof-item strong { display: block; color: #07192e !important; font-size: .88rem; font-weight: 600; }
+    .proof-item span   { color: #555555 !important; font-size: .78rem; }
+
+    /* Card flutuante (Estatísticas no Hero) */
+    .glass-panel {
+      background: #ffffff !important;
+      border: 1px solid #e2eaf3 !important;
+      box-shadow: 0 12px 40px rgba(11,46,80,.08) !important;
+    }
+    .stat-header, .mini-card span, .mini-card strong {
+      color: #07192e !important;
+    }
+    .stat-caption {
+      color: #555555 !important;
+    }
+
+    /* Faixa de logos/textos */
+    .logos-strip {
+      background: #f4f6f9 !important;
+      border-top: 1px solid #e2eaf3 !important;
+      border-bottom: 1px solid #e2eaf3 !important;
+    }
+    .logos-strip span {
+      color: #555555 !important;
+    }
+
+    /* Seções Gerais */
+    .section, .section-navy, .section-dark, .section-alt {
+      background-color: #ffffff !important;
+      background-image: none !important;
+      color: #07192e !important;
+    }
+    .section-head h2 {
+      color: #07192e !important;
+    }
+    .section-head p {
+      color: #555555 !important;
+    }
+
+    /* Cards gerais (Vantagens, Compliance, etc) */
+    .card, .step {
+      background: #ffffff !important;
+      border: 1px solid #e2eaf3 !important;
+      color: #07192e !important;
+    }
+    .card h3, .step h3 { color: #07192e !important; }
+    .card p, .step p { color: #555555 !important; }
+
+    /* Linha de números */
     .stats-row {
       display: grid; grid-template-columns: repeat(3,1fr);
-      gap: 1px; background: rgba(255,255,255,.1);
+      gap: 1px; background: #e2eaf3 !important;
       border-radius: 16px; overflow: hidden;
+      border: 1px solid #e2eaf3;
     }
-    .stat-block { background: #0b3050; padding: 48px 32px; text-align: center; }
+    .stat-block { background: #ffffff !important; padding: 48px 32px; text-align: center; }
     .stat-value {
       font-size: 3.4rem; font-weight: 800; line-height: 1;
-      color: #f5820a; margin-bottom: 8px;
+      color: #f5820a !important; margin-bottom: 8px;
     }
-    .stat-label { color: rgba(255,255,255,.6); font-size: .9rem; }
+    .stat-label { color: #555555 !important; font-size: .9rem; }
+
+    /* Grid de Recursos */
     .recursos-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
     .recurso-card {
-      background: #fff; border: 1.5px solid #e2eaf3;
+      background: #ffffff !important; border: 1.5px solid #e2eaf3 !important;
       border-radius: 14px; padding: 28px 24px; transition: all .25s;
     }
-    .recurso-card:hover { border-color: #1a78c2; transform: translateY(-4px); box-shadow: 0 12px 40px rgba(11,46,80,.12); }
+    .recurso-card:hover { border-color: #1a78c2 !important; transform: translateY(-4px); box-shadow: 0 12px 40px rgba(11,46,80,.12); }
     .recurso-icon {
       width: 48px; height: 48px; border-radius: 12px;
-      background: linear-gradient(135deg,#0b4f8a,#1a78c2);
+      background: linear-gradient(135deg,#0b4f8a,#1a78c2) !important;
       display: flex; align-items: center; justify-content: center;
+      color: #fff !important;
       font-size: 1.3rem; margin-bottom: 16px;
     }
-    .recurso-card h3 { font-size: 1rem; font-weight: 700; color: #07192e; margin-bottom: 8px; }
-    .recurso-card p  { font-size: .875rem; color: #8a9ab0; line-height: 1.6; }
+    .recurso-card h3 { font-size: 1rem; font-weight: 700; color: #07192e !important; margin-bottom: 8px; }
+    .recurso-card p  { font-size: .875rem; color: #555555 !important; line-height: 1.6; }
+
+    /* FAQ */
     .faq-list { max-width: 720px; margin: 0 auto; }
-    .faq-item { border-bottom: 1px solid #e2eaf3; }
+    .faq-item { border-bottom: 1px solid #e2eaf3 !important; }
     .faq-btn {
       width: 100%; background: none; border: none; cursor: pointer;
       text-align: left; padding: 22px 0;
       display: flex; justify-content: space-between; align-items: center;
       font-family: 'Inter', sans-serif; font-size: .95rem; font-weight: 600;
-      color: #07192e; gap: 16px; transition: color .2s;
+      color: #07192e !important; gap: 16px; transition: color .2s;
     }
-    .faq-btn:hover { color: #0b4f8a; }
+    .faq-btn:hover { color: #0b4f8a !important; }
     .faq-arrow {
-      width: 26px; height: 26px; border-radius: 50%; background: #f4f6f9;
+      width: 26px; height: 26px; border-radius: 50%; background: #f4f6f9 !important;
       display: flex; align-items: center; justify-content: center;
       font-size: .7rem; flex-shrink: 0; transition: transform .3s, background .2s;
     }
-    .faq-item.open .faq-arrow { transform: rotate(180deg); background: #f5820a; color: #fff; }
+    .faq-item.open .faq-arrow { transform: rotate(180deg); background: #f5820a !important; color: #fff !important; }
     .faq-body { max-height: 0; overflow: hidden; transition: max-height .38s ease; }
     .faq-item.open .faq-body { max-height: 260px; }
-    .faq-body p { padding-bottom: 22px; color: #8a9ab0; font-size: .9rem; line-height: 1.7; }
+    .faq-body p { padding-bottom: 22px; color: #555555 !important; font-size: .9rem; line-height: 1.7; }
+
+    /* CTA Final */
     .cta-final {
-      background: linear-gradient(140deg, #07192e 0%, #0b3d6b 60%, #0d4a80 100%);
+      background: #ffffff !important;
       padding: 96px 0; text-align: center; position: relative; overflow: hidden;
+      border-top: 1px solid #e2eaf3 !important;
     }
-    .cta-final::before {
-      content: ''; position: absolute; top: -200px; left: 50%;
-      transform: translateX(-50%); width: 700px; height: 500px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(26,120,194,.2) 0%, transparent 70%);
-    }
+    .cta-final::before { display: none !important; }
     .cta-final h2 {
       font-size: clamp(1.9rem, 3.5vw, 3rem); font-weight: 800;
-      color: #fff; line-height: 1.15; letter-spacing: -.02em; margin-bottom: 16px;
+      color: #07192e !important; line-height: 1.15; letter-spacing: -.02em; margin-bottom: 16px;
     }
-    .cta-final p { color: rgba(255,255,255,.65); font-size: 1rem; max-width: 500px; margin: 0 auto 36px; }
+    .cta-final p { color: #555555 !important; font-size: 1rem; max-width: 500px; margin: 0 auto 36px; }
     .cta-final-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
     .cta-phone {
       display: inline-flex; align-items: center; gap: 8px; margin-top: 24px;
-      background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.18);
+      background: #f4f6f9 !important; border: 1px solid #e2eaf3 !important;
       border-radius: 50px; padding: 10px 22px;
-      color: #fff; font-weight: 600; font-size: .95rem;
+      color: #07192e !important; font-weight: 600; font-size: .95rem;
       text-decoration: none; transition: background .2s;
     }
-    .cta-phone:hover { background: rgba(255,255,255,.16); }
+    .cta-phone:hover { background: #e2eaf3 !important; }
+
+    /* Footer */
+    .site-footer {
+      background: #f8fafc !important;
+      color: #07192e !important;
+      border-top: 1px solid #e2eaf3 !important;
+      padding: 40px 0;
+    }
+    .site-footer p, .site-footer a { color: #555555 !important; }
+    .site-footer h4 { color: #07192e !important; margin-bottom: 16px; }
+
+    /* WhatsApp Float */
     .whatsapp-float {
       position: fixed; bottom: 26px; right: 26px; z-index: 99;
-      background: #25D366; color: #fff;
+      background: #25D366 !important; color: #fff !important;
       border-radius: 50px; padding: 13px 22px;
       font-weight: 700; font-size: .9rem; text-decoration: none;
       display: flex; align-items: center; gap: 8px;
@@ -112,11 +226,15 @@
     }
     @keyframes popIn { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0); } }
     .whatsapp-float:hover { transform: translateY(-3px); box-shadow: 0 10px 34px rgba(37,211,102,.55); }
+
+    /* Responsividade */
     @media (max-width: 860px) {
       .recursos-grid { grid-template-columns: 1fr 1fr; }
       .stats-row     { grid-template-columns: 1fr; }
     }
-    @media (max-width: 560px) { .recursos-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 560px) { 
+      .recursos-grid { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body>
@@ -234,7 +352,7 @@
       <div class="container">
         <div class="section-head reveal" style="margin-bottom:48px;">
           <span class="eyebrow">NOSSOS NÚMEROS</span>
-          <h2 style="color:#fff;">Resultados que comprovam nossa expertise</h2>
+          <h2>Resultados que comprovam nossa expertise</h2>
         </div>
         <div class="stats-row reveal">
           <div class="stat-block">
