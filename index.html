@@ -160,12 +160,16 @@
     .recurso-card h3 { font-size: 1rem; font-weight: 700; color: #07192e !important; margin-bottom: 8px; }
     .recurso-card p  { font-size: .875rem; color: #555555 !important; line-height: 1.6; }
 
-    /* FAQ */
+     /* FAQ */
     .faq-list { max-width: 720px; margin: 0 auto; }
-    .faq-item { border-bottom: 1px solid #e2eaf3 !important; }
+    .faq-item { 
+      background: #ffffff !important; /* Força o fundo branco e tira o degradê */
+      border-bottom: 1px solid #e2eaf3 !important; 
+    }
     .faq-btn {
-      width: 100%; background: none; border: none; cursor: pointer;
-      text-align: left; padding: 22px 0;
+      width: 100%; background: none !important; border: none; cursor: pointer;
+      text-align: left; 
+      padding: 22px 24px !important; /* <-- Adicionado 24px de respiro nas laterais */
       display: flex; justify-content: space-between; align-items: center;
       font-family: 'Inter', sans-serif; font-size: .95rem; font-weight: 600;
       color: #07192e !important; gap: 16px; transition: color .2s;
@@ -179,7 +183,10 @@
     .faq-item.open .faq-arrow { transform: rotate(180deg); background: #f5820a !important; color: #fff !important; }
     .faq-body { max-height: 0; overflow: hidden; transition: max-height .38s ease; }
     .faq-item.open .faq-body { max-height: 260px; }
-    .faq-body p { padding-bottom: 22px; color: #555555 !important; font-size: .9rem; line-height: 1.7; }
+    .faq-body p { 
+      padding: 0 24px 22px 24px !important; /* <-- Adicionado 24px de respiro nas laterais do texto */
+      color: #555555 !important; font-size: .9rem; line-height: 1.7; 
+    }
 
     /* CTA Final */
     .cta-final {
