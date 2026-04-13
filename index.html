@@ -3,279 +3,1260 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>EiMultas | Enriquecimento de dados para processos de multas</title>
-  <meta name="description" content="A EiMultas transforma publicações do Diário Oficial em inteligência operacional com enriquecimento estratégico de dados para processos de multas." />
-  <meta name="theme-color" content="#0b4f8a" />
+  <title>EiMultas | Especialistas em Recursos de Multas de Trânsito</title>
+  <meta name="description" content="A EiMultas é especialista em recursos de multas de trânsito. Reduza ou elimine suas multas com quem realmente entende da lei." />
+  <meta name="theme-color" content="#0b3d6b" />
   <link rel="icon" href="assets/favicon.png" />
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+  <style>
+    /* ── RESET & BASE ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    :root {
+      --navy:   #0b2e50;
+      --blue:   #0e4d8a;
+      --sky:    #1a78c2;
+      --accent: #f4a11d;
+      --gold:   #e8891a;
+      --white:  #ffffff;
+      --off:    #f5f7fa;
+      --gray:   #8a9ab0;
+      --dark:   #07192e;
+      --text:   #1c2b3a;
+      --font-head: 'Syne', sans-serif;
+      --font-body: 'DM Sans', sans-serif;
+      --radius: 16px;
+      --radius-sm: 10px;
+      --shadow: 0 8px 40px rgba(11,46,80,.13);
+      --shadow-lg: 0 20px 80px rgba(11,46,80,.22);
+    }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--text);
+      background: var(--white);
+      overflow-x: hidden;
+      line-height: 1.65;
+    }
+
+    /* ── UTILITIES ── */
+    .container { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+    .eyebrow {
+      display: inline-block;
+      font-family: var(--font-head);
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 14px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-head);
+      font-weight: 700;
+      font-size: .95rem;
+      border-radius: 50px;
+      text-decoration: none;
+      transition: all .25s ease;
+      cursor: pointer;
+      border: none;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: var(--navy);
+      padding: 14px 30px;
+    }
+    .btn-primary:hover {
+      background: var(--gold);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(244,161,29,.4);
+    }
+    .btn-secondary {
+      background: transparent;
+      color: var(--white);
+      border: 2px solid rgba(255,255,255,.35);
+      padding: 12px 28px;
+    }
+    .btn-secondary:hover {
+      border-color: var(--white);
+      background: rgba(255,255,255,.1);
+    }
+    .btn-outline {
+      background: transparent;
+      color: var(--blue);
+      border: 2px solid var(--blue);
+      padding: 12px 26px;
+    }
+    .btn-outline:hover {
+      background: var(--blue);
+      color: var(--white);
+    }
+    .btn-lg { padding: 17px 40px; font-size: 1.05rem; }
+
+    /* ── NOISE TEXTURE OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      opacity: .025;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-repeat: repeat;
+      background-size: 200px 200px;
+    }
+
+    /* ── HEADER ── */
+    .site-header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 0;
+      transition: background .3s, box-shadow .3s;
+    }
+    .site-header.scrolled {
+      background: rgba(11,46,80,.97);
+      box-shadow: 0 4px 30px rgba(0,0,0,.18);
+      backdrop-filter: blur(12px);
+    }
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      padding: 20px 24px;
+    }
+    .brand img { height: 40px; display: block; }
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      margin-left: auto;
+    }
+    .nav-links a {
+      color: rgba(255,255,255,.82);
+      text-decoration: none;
+      font-family: var(--font-head);
+      font-weight: 600;
+      font-size: .88rem;
+      letter-spacing: .02em;
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+    .nav-cta { margin-left: 8px; }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      background: linear-gradient(135deg, var(--dark) 0%, var(--navy) 45%, #0d3f70 100%);
+    }
+
+    /* Diagonal decorative shape */
+    .hero::after {
+      content: '';
+      position: absolute;
+      right: -100px; top: -80px;
+      width: 700px; height: 700px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(30,120,194,.35) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    /* Animated road lines */
+    .road-lines {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 6px;
+      background: repeating-linear-gradient(90deg,
+        var(--accent) 0px, var(--accent) 40px,
+        transparent 40px, transparent 80px
+      );
+      animation: roadScroll 2s linear infinite;
+      opacity: .6;
+    }
+    @keyframes roadScroll {
+      from { background-position: 0 0; }
+      to { background-position: 80px 0; }
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      gap: 64px;
+      align-items: center;
+      padding: 120px 24px 80px;
+    }
+    .hero-copy { position: relative; z-index: 1; }
+    .hero-copy h1 {
+      font-family: var(--font-head);
+      font-size: clamp(2.4rem, 5vw, 3.8rem);
+      font-weight: 800;
+      color: var(--white);
+      line-height: 1.1;
+      margin-bottom: 24px;
+      letter-spacing: -.02em;
+    }
+    .hero-copy h1 em {
+      font-style: normal;
+      color: var(--accent);
+    }
+    .hero-copy .lead {
+      color: rgba(255,255,255,.75);
+      font-size: 1.1rem;
+      max-width: 520px;
+      margin-bottom: 36px;
+      font-weight: 300;
+    }
+    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 48px; }
+
+    /* Trust badges */
+    .trust-row {
+      display: flex;
+      gap: 28px;
+      flex-wrap: wrap;
+    }
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: rgba(255,255,255,.7);
+      font-size: .85rem;
+    }
+    .trust-icon {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.1);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+
+    /* Hero card */
+    .hero-card { position: relative; z-index: 1; }
+    .glass-card {
+      background: rgba(255,255,255,.07);
+      border: 1px solid rgba(255,255,255,.14);
+      border-radius: 24px;
+      padding: 36px;
+      backdrop-filter: blur(16px);
+    }
+    .glass-card .card-label {
+      font-size: .75rem;
+      font-family: var(--font-head);
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+    .glass-card .big-stat {
+      font-family: var(--font-head);
+      font-size: 3.8rem;
+      font-weight: 800;
+      color: var(--white);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .glass-card .stat-desc {
+      color: rgba(255,255,255,.6);
+      font-size: .88rem;
+      margin-bottom: 28px;
+    }
+    .step-pills { display: flex; flex-direction: column; gap: 12px; }
+    .step-pill {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 12px;
+      padding: 14px 16px;
+    }
+    .pill-num {
+      width: 30px; height: 30px;
+      background: var(--accent);
+      color: var(--navy);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-head);
+      font-weight: 800;
+      font-size: .8rem;
+      flex-shrink: 0;
+    }
+    .pill-text strong {
+      display: block;
+      color: var(--white);
+      font-size: .9rem;
+      font-family: var(--font-head);
+    }
+    .pill-text span {
+      color: rgba(255,255,255,.55);
+      font-size: .8rem;
+    }
+
+    /* ── STRIP ── */
+    .strip-section {
+      background: var(--accent);
+      padding: 16px 0;
+      overflow: hidden;
+    }
+    .strip-track {
+      display: flex;
+      gap: 0;
+      animation: stripScroll 18s linear infinite;
+      width: max-content;
+    }
+    @keyframes stripScroll {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+    .strip-item {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      padding: 0 32px;
+      font-family: var(--font-head);
+      font-weight: 700;
+      font-size: .85rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--navy);
+      white-space: nowrap;
+    }
+    .strip-item::after {
+      content: '◆';
+      font-size: .5rem;
+    }
+
+    /* ── SECTION BASE ── */
+    .section { padding: 100px 0; }
+    .section-dark {
+      background: var(--off);
+    }
+    .section-navy {
+      background: var(--navy);
+      color: var(--white);
+    }
+    .section-head {
+      text-align: center;
+      max-width: 680px;
+      margin: 0 auto 64px;
+    }
+    .section-head h2 {
+      font-family: var(--font-head);
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -.02em;
+      margin-bottom: 16px;
+    }
+    .section-head p {
+      color: var(--gray);
+      font-size: 1.05rem;
+      font-weight: 300;
+    }
+    .section-navy .section-head p { color: rgba(255,255,255,.65); }
+
+    /* ── COMO FUNCIONA ── */
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+    }
+    .step-card {
+      background: var(--white);
+      padding: 44px 36px;
+      position: relative;
+      overflow: hidden;
+    }
+    .step-card::before {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--accent);
+      transform: scaleX(0);
+      transition: transform .35s ease;
+      transform-origin: left;
+    }
+    .step-card:hover::before { transform: scaleX(1); }
+    .step-card:hover { background: var(--off); }
+    .step-num {
+      font-family: var(--font-head);
+      font-size: 5rem;
+      font-weight: 800;
+      color: rgba(14,77,138,.08);
+      line-height: 1;
+      margin-bottom: 20px;
+    }
+    .step-card h3 {
+      font-family: var(--font-head);
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: var(--navy);
+      margin-bottom: 12px;
+    }
+    .step-card p { color: var(--gray); font-size: .95rem; }
+
+    /* ── TIPOS DE RECURSOS ── */
+    .infra-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+    .infra-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 32px;
+      border: 1.5px solid #e4eaf1;
+      transition: all .25s ease;
+    }
+    .infra-card:hover {
+      border-color: var(--sky);
+      transform: translateY(-4px);
+      box-shadow: var(--shadow);
+    }
+    .infra-icon {
+      width: 52px; height: 52px;
+      background: linear-gradient(135deg, var(--blue), var(--sky));
+      border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem;
+      margin-bottom: 20px;
+    }
+    .infra-card h3 {
+      font-family: var(--font-head);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 10px;
+    }
+    .infra-card p { color: var(--gray); font-size: .9rem; }
+
+    /* ── STATS SECTION ── */
+    .stats-wrap {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: rgba(255,255,255,.1);
+    }
+    .stat-block {
+      padding: 48px 40px;
+      text-align: center;
+      background: var(--navy);
+    }
+    .stat-block .stat-value {
+      font-family: var(--font-head);
+      font-size: 3.4rem;
+      font-weight: 800;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 10px;
+    }
+    .stat-block .stat-label {
+      color: rgba(255,255,255,.65);
+      font-size: .9rem;
+      font-weight: 300;
+    }
+
+    /* ── VANTAGENS ── */
+    .vant-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+    .vant-card {
+      border-radius: var(--radius);
+      padding: 36px;
+      border: 1.5px solid #e4eaf1;
+      transition: all .28s ease;
+      background: var(--white);
+      display: flex;
+      gap: 20px;
+    }
+    .vant-card:hover {
+      box-shadow: var(--shadow);
+      border-color: var(--sky);
+    }
+    .vant-bullet {
+      width: 44px; height: 44px;
+      background: linear-gradient(135deg, rgba(14,77,138,.1), rgba(26,120,194,.15));
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+    .vant-card h3 {
+      font-family: var(--font-head);
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 8px;
+    }
+    .vant-card p { color: var(--gray); font-size: .9rem; }
+
+    /* ── FAQ ── */
+    .faq-list { max-width: 760px; margin: 0 auto; }
+    .faq-item {
+      border-bottom: 1px solid #e4eaf1;
+    }
+    .faq-q {
+      width: 100%;
+      background: none;
+      border: none;
+      cursor: pointer;
+      text-align: left;
+      padding: 24px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--font-head);
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--navy);
+      gap: 16px;
+      transition: color .2s;
+    }
+    .faq-q:hover { color: var(--sky); }
+    .faq-chevron {
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      background: var(--off);
+      display: flex; align-items: center; justify-content: center;
+      font-size: .8rem;
+      flex-shrink: 0;
+      transition: transform .3s, background .2s;
+    }
+    .faq-item.open .faq-chevron {
+      transform: rotate(180deg);
+      background: var(--accent);
+    }
+    .faq-a {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height .4s ease;
+    }
+    .faq-item.open .faq-a { max-height: 300px; }
+    .faq-a p {
+      padding-bottom: 24px;
+      color: var(--gray);
+      font-size: .95rem;
+      line-height: 1.7;
+    }
+
+    /* ── CTA FINAL ── */
+    .cta-section {
+      background: linear-gradient(135deg, var(--dark), var(--navy));
+      padding: 100px 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      top: -200px; left: 50%;
+      transform: translateX(-50%);
+      width: 800px; height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(26,120,194,.25) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .cta-section h2 {
+      font-family: var(--font-head);
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 800;
+      color: var(--white);
+      line-height: 1.12;
+      margin-bottom: 20px;
+      letter-spacing: -.02em;
+    }
+    .cta-section h2 em { font-style: normal; color: var(--accent); }
+    .cta-section p {
+      color: rgba(255,255,255,.65);
+      font-size: 1.05rem;
+      max-width: 540px;
+      margin: 0 auto 40px;
+      font-weight: 300;
+    }
+    .cta-buttons { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+    /* phone highlight */
+    .phone-highlight {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.18);
+      border-radius: 50px;
+      padding: 10px 22px;
+      margin-top: 28px;
+      color: var(--white);
+      font-family: var(--font-head);
+      font-size: 1rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: background .2s;
+    }
+    .phone-highlight:hover { background: rgba(255,255,255,.16); }
+
+    /* ── FOOTER ── */
+    .site-footer {
+      background: var(--dark);
+      padding: 60px 0 32px;
+      color: rgba(255,255,255,.55);
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 48px;
+    }
+    .footer-logo { height: 36px; margin-bottom: 16px; display: block; }
+    .footer-tagline { font-size: .9rem; font-weight: 300; line-height: 1.6; }
+    .site-footer h4 {
+      font-family: var(--font-head);
+      font-weight: 700;
+      font-size: .8rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.35);
+      margin-bottom: 18px;
+    }
+    .site-footer a {
+      display: block;
+      color: rgba(255,255,255,.6);
+      text-decoration: none;
+      font-size: .9rem;
+      margin-bottom: 10px;
+      transition: color .2s;
+    }
+    .site-footer a:hover { color: var(--accent); }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,.08);
+      padding-top: 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: .8rem;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .footer-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(244,161,29,.12);
+      color: var(--accent);
+      border: 1px solid rgba(244,161,29,.3);
+      border-radius: 50px;
+      padding: 4px 14px;
+      font-size: .75rem;
+      font-family: var(--font-head);
+      font-weight: 700;
+    }
+
+    /* ── WHATSAPP FLOAT ── */
+    .wa-float {
+      position: fixed;
+      bottom: 28px; right: 28px;
+      z-index: 99;
+      background: #25D366;
+      color: var(--white);
+      border-radius: 50px;
+      padding: 14px 22px;
+      font-family: var(--font-head);
+      font-weight: 700;
+      font-size: .9rem;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 6px 28px rgba(37,211,102,.45);
+      transition: transform .25s, box-shadow .25s;
+      animation: floatPop .6s ease 1.5s both;
+    }
+    @keyframes floatPop {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .wa-float:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 36px rgba(37,211,102,.55);
+    }
+    .wa-icon { font-size: 1.2rem; }
+
+    /* ── REVEAL ANIMATION ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity .65s ease, transform .65s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .delay-1 { transition-delay: .1s; }
+    .delay-2 { transition-delay: .2s; }
+    .delay-3 { transition-delay: .3s; }
+
+    /* ── MOBILE ── */
+    @media (max-width: 900px) {
+      .hero-grid { grid-template-columns: 1fr; gap: 40px; padding: 100px 24px 60px; }
+      .hero-card { display: none; }
+      .steps-grid { grid-template-columns: 1fr; gap: 2px; }
+      .infra-grid, .vant-grid { grid-template-columns: 1fr; }
+      .stats-wrap { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+      .nav-links { display: none; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+    }
+
+    /* ── MENU MOBILE ── */
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+      margin-left: auto;
+    }
+    .menu-toggle span {
+      display: block;
+      width: 24px; height: 2px;
+      background: var(--white);
+      margin: 5px 0;
+      transition: all .3s;
+      border-radius: 2px;
+    }
+    @media (max-width: 900px) {
+      .menu-toggle { display: block; }
+      .nav-links {
+        display: flex;
+        position: fixed;
+        top: 0; right: -100%;
+        width: 260px;
+        height: 100vh;
+        flex-direction: column;
+        background: var(--dark);
+        padding: 80px 32px 40px;
+        gap: 20px;
+        transition: right .35s ease;
+        z-index: 200;
+        box-shadow: -10px 0 40px rgba(0,0,0,.3);
+      }
+      .nav-links.open { right: 0; }
+      .nav-links a { font-size: 1.1rem; }
+    }
+
+    /* Cookie banner */
+    .cookie-bar {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      z-index: 90;
+      background: var(--dark);
+      border-top: 2px solid var(--accent);
+      padding: 18px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .cookie-bar p { color: rgba(255,255,255,.7); font-size: .85rem; }
+    .cookie-bar a { color: var(--accent); }
+    .cookie-bar.hidden { display: none; }
+  </style>
 </head>
 <body>
-  <div class="bg-orb orb-1"></div>
-  <div class="bg-orb orb-2"></div>
 
-  <header class="site-header">
+  <!-- HEADER -->
+  <header class="site-header" id="header">
     <div class="container nav">
-      <a class="brand" href="index.html" aria-label="EiMultas">
-        <img src="assets/logo.png" alt="Logo EiMultas" />
+      <a class="brand" href="/" aria-label="EiMultas">
+        <img src="assets/logo.png" alt="EiMultas" />
       </a>
-      <nav class="nav-links">
-        <a href="#como-funciona">Como funciona</a>
+      <nav class="nav-links" id="navLinks">
+        <a href="#como-funciona">Como Funciona</a>
+        <a href="#recursos">Tipos de Recursos</a>
         <a href="#vantagens">Vantagens</a>
-        <a href="#compliance">Compliance</a>
+        <a href="#faq">Dúvidas</a>
         <a href="pages/politica-de-privacidade.html">Privacidade</a>
       </nav>
-      <a class="btn btn-header" href="https://wa.me/5549999440002?text=Olá%2C+quero+entender+como+a+EiMultas+pode+me+ajudar." target="_blank" rel="noopener">
-        Falar no WhatsApp
+      <a class="btn btn-primary nav-cta" href="tel:+554935181609" style="padding:11px 22px;font-size:.85rem;">
+        📞 (49) 3518-1609
       </a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </header>
 
+  <!-- HERO -->
+  <section class="hero">
+    <div class="road-lines"></div>
+    <div class="hero-grid container">
+      <div class="hero-copy reveal">
+        <span class="eyebrow">Especialistas em Recursos de Multas de Trânsito</span>
+        <h1>Sua multa pode ser <em>reduzida ou cancelada.</em></h1>
+        <p class="lead">
+          A EiMultas analisa cada infração de trânsito com critério técnico e jurídico. 
+          Defend­emos seus direitos com agilidade, seriedade e resultados reais.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary btn-lg" href="https://wa.me/5549935181609?text=Olá%2C+quero+analisar+minha+multa+com+a+EiMultas." target="_blank" rel="noopener">
+            💬 Falar pelo WhatsApp
+          </a>
+          <a class="btn btn-secondary" href="tel:+554935181609">
+            📞 Ligar agora
+          </a>
+        </div>
+        <div class="trust-row">
+          <div class="trust-item">
+            <div class="trust-icon">✅</div>
+            <div>
+              <strong style="color:#fff;display:block;font-size:.88rem;">Análise gratuita</strong>
+              <span style="font-size:.78rem;">da sua infração</span>
+            </div>
+          </div>
+          <div class="trust-item">
+            <div class="trust-icon">⚖️</div>
+            <div>
+              <strong style="color:#fff;display:block;font-size:.88rem;">Base legal sólida</strong>
+              <span style="font-size:.78rem;">para cada recurso</span>
+            </div>
+          </div>
+          <div class="trust-item">
+            <div class="trust-icon">⚡</div>
+            <div>
+              <strong style="color:#fff;display:block;font-size:.88rem;">Agilidade total</strong>
+              <span style="font-size:.78rem;">dentro dos prazos</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Side card -->
+      <div class="hero-card reveal delay-2">
+        <div class="glass-card">
+          <div class="card-label">Nossa operação</div>
+          <div class="big-stat" id="counterStat">0</div>
+          <div class="stat-desc">Recursos processados com sucesso</div>
+          <div class="step-pills">
+            <div class="step-pill">
+              <div class="pill-num">1</div>
+              <div class="pill-text">
+                <strong>Envie sua multa</strong>
+                <span>via WhatsApp ou telefone</span>
+              </div>
+            </div>
+            <div class="step-pill">
+              <div class="pill-num">2</div>
+              <div class="pill-text">
+                <strong>Análise técnica gratuita</strong>
+                <span>verificamos o embasamento legal</span>
+              </div>
+            </div>
+            <div class="step-pill">
+              <div class="pill-num">3</div>
+              <div class="pill-text">
+                <strong>Recurso elaborado</strong>
+                <span>com argumentação sólida e dentro do prazo</span>
+              </div>
+            </div>
+            <div class="step-pill">
+              <div class="pill-num">4</div>
+              <div class="pill-text">
+                <strong>Resultado</strong>
+                <span>acompanhamento até a decisão final</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STRIP -->
+  <div class="strip-section">
+    <div class="strip-track" id="stripTrack">
+      <div class="strip-item">Defesa de Autuação</div>
+      <div class="strip-item">JARI</div>
+      <div class="strip-item">CETRAN</div>
+      <div class="strip-item">Suspensão de CNH</div>
+      <div class="strip-item">Recursos Administrativos</div>
+      <div class="strip-item">Pontuação na CNH</div>
+      <div class="strip-item">Infração Grave</div>
+      <div class="strip-item">Infração Gravíssima</div>
+      <div class="strip-item">Defesa de Autuação</div>
+      <div class="strip-item">JARI</div>
+      <div class="strip-item">CETRAN</div>
+      <div class="strip-item">Suspensão de CNH</div>
+      <div class="strip-item">Recursos Administrativos</div>
+      <div class="strip-item">Pontuação na CNH</div>
+      <div class="strip-item">Infração Grave</div>
+      <div class="strip-item">Infração Gravíssima</div>
+    </div>
+  </div>
+
   <main>
-    <section class="hero">
-      <div class="container hero-grid">
-        <div class="hero-copy reveal">
-          <span class="eyebrow">INTELIGÊNCIA DE DADOS COM RESPONSABILIDADE</span>
-          <h1>Velocidade comercial com mais critério, contexto e governança.</h1>
-          <p class="lead">
-            A EiMultas organiza informações públicas, monitora publicações estratégicas e estrutura dados com foco em
-            eficiência operacional. Tudo com comunicação transparente, compromisso com privacidade e respeito à LGPD.
-          </p>
-          <div class="hero-actions">
-            <a class="btn btn-primary" href="https://wa.me/5549999440002?text=Olá%2C+quero+solicitar+um+orçamento+da+EiMultas." target="_blank" rel="noopener">
-              Solicitar orçamento
-            </a>
-            <a class="btn btn-secondary" href="#compliance">Ver compromisso LGPD</a>
-          </div>
-          <div class="hero-proof">
-            <div class="proof-item">
-              <strong>Transparência</strong>
-              <span>informações claras sobre tratamento de dados</span>
-            </div>
-            <div class="proof-item">
-              <strong>Base documental</strong>
-              <span>políticas e termos prontos no site</span>
-            </div>
-            <div class="proof-item">
-              <strong>Contato direto</strong>
-              <span>canal para solicitações relacionadas à privacidade</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="hero-card reveal delay-1">
-          <div class="glass-panel">
-            <div class="stat-header">
-              <span class="dot"></span>
-              <span>Operação orientada por governança</span>
-            </div>
-            <div class="stat-number" data-counter="2478">0</div>
-            <div class="stat-caption">Publicações organizadas com foco em inteligência operacional e conformidade informacional</div>
-            <div class="mini-grid">
-              <div class="mini-card">
-                <span>Fonte principal</span>
-                <strong>Diário Oficial</strong>
-              </div>
-              <div class="mini-card">
-                <span>Postura</span>
-                <strong>Privacidade e clareza</strong>
-              </div>
-              <div class="mini-card">
-                <span>Estratégia</span>
-                <strong>Dados estruturados</strong>
-              </div>
-              <div class="mini-card">
-                <span>Canal LGPD</span>
-                <strong>Atendimento dedicado</strong>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="logos-strip reveal">
-      <div class="container strip">
-        <span>Estratégia</span>
-        <span>Dados</span>
-        <span>Governança</span>
-        <span>Precisão</span>
-        <span>Compliance</span>
-        <span>Conversão</span>
-      </div>
-    </section>
-
+    <!-- COMO FUNCIONA -->
     <section id="como-funciona" class="section">
       <div class="container">
         <div class="section-head reveal">
-          <span class="eyebrow">COMO FUNCIONA</span>
-          <h2>Do dado público à inteligência operacional</h2>
-          <p>
-            A EiMultas estrutura informações para reduzir trabalho manual, acelerar leitura de oportunidades e melhorar a capacidade de ação do seu time.
-          </p>
+          <span class="eyebrow">Como Funciona</span>
+          <h2>Do auto de infração ao recurso aprovado</h2>
+          <p>Processo simples, transparente e com acompanhamento em todas as etapas.</p>
         </div>
-        <div class="steps">
-          <article class="step reveal">
-            <div class="step-number">01</div>
-            <h3>Mapeamento</h3>
-            <p>Identificação de publicações e registros de interesse com foco em contexto operacional e relevância comercial.</p>
-          </article>
-          <article class="step reveal delay-1">
-            <div class="step-number">02</div>
-            <h3>Estruturação</h3>
-            <p>Organização e enriquecimento de dados para gerar bases mais úteis, filtradas e acionáveis.</p>
-          </article>
-          <article class="step reveal delay-2">
-            <div class="step-number">03</div>
-            <h3>Execução</h3>
-            <p>Entrega de informação mais preparada para decisão, abordagem e ganho de velocidade na operação.</p>
-          </article>
+        <div class="steps-grid">
+          <div class="step-card reveal">
+            <div class="step-num">01</div>
+            <h3>Recepção da Multa</h3>
+            <p>Você nos envia o auto de infração ou os dados da multa pelo WhatsApp, e-mail ou telefone. Em minutos iniciamos a triagem.</p>
+          </div>
+          <div class="step-card reveal delay-1">
+            <div class="step-num">02</div>
+            <h3>Análise Técnico-Jurídica</h3>
+            <p>Nossa equipe verifica vícios formais, erros de medição, falhas no processo de autuação e qualquer argumento válido para contestar a infração.</p>
+          </div>
+          <div class="step-card reveal delay-2">
+            <div class="step-num">03</div>
+            <h3>Elaboração do Recurso</h3>
+            <p>Redigimos o recurso com fundamentação sólida baseada no CTB e nas normas do CONTRAN, apresentando na instância correta dentro do prazo legal.</p>
+          </div>
         </div>
       </div>
     </section>
 
-    <section id="vantagens" class="section section-dark">
+    <!-- STATS -->
+    <section class="section-navy section">
+      <div class="container">
+        <div class="section-head reveal" style="max-width:100%;text-align:center;margin-bottom:0;">
+          <span class="eyebrow">Resultados que falam</span>
+          <h2 style="color:#fff;margin-bottom:48px;">Números da nossa operação</h2>
+        </div>
+        <div class="stats-wrap">
+          <div class="stat-block reveal">
+            <div class="stat-value" data-target="3200">0</div>
+            <div class="stat-label">Recursos elaborados</div>
+          </div>
+          <div class="stat-block reveal delay-1">
+            <div class="stat-value" data-target="87" data-suffix="%">0%</div>
+            <div class="stat-label">Taxa de deferimento</div>
+          </div>
+          <div class="stat-block reveal delay-2">
+            <div class="stat-value" data-target="15" data-prefix="até " data-suffix=" dias">0 dias</div>
+            <div class="stat-label">Prazo médio de resposta</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TIPOS DE RECURSOS -->
+    <section id="recursos" class="section section-dark">
       <div class="container">
         <div class="section-head reveal">
-          <span class="eyebrow">VANTAGENS</span>
-          <h2>Escala com método, não com improviso.</h2>
+          <span class="eyebrow">Tipos de Recursos</span>
+          <h2>Atuamos em todas as instâncias recursais</h2>
+          <p>Do primeiro prazo de defesa até as instâncias superiores do sistema administrativo de trânsito.</p>
         </div>
-        <div class="cards">
-          <article class="card reveal">
-            <h3>Menos trabalho artesanal</h3>
-            <p>Substitua rotinas manuais dispersas por uma operação mais organizada e replicável.</p>
-          </article>
-          <article class="card reveal delay-1">
-            <h3>Mais timing</h3>
-            <p>Uma oportunidade tratada cedo tende a gerar mais atenção e melhores chances de avanço comercial.</p>
-          </article>
-          <article class="card reveal delay-2">
-            <h3>Mais contexto</h3>
-            <p>Dados estruturados permitem abordagem menos genérica e com maior qualidade de comunicação.</p>
-          </article>
-          <article class="card reveal">
-            <h3>Mais confiança</h3>
-            <p>Postura transparente de privacidade reforça credibilidade diante de parceiros e clientes.</p>
-          </article>
+        <div class="infra-grid">
+          <div class="infra-card reveal">
+            <div class="infra-icon">📋</div>
+            <h3>Defesa Prévia de Autuação</h3>
+            <p>Primeiro prazo disponível antes da multa se tornar definitiva. Apresentamos defesa técnica antes mesmo da notificação de penalidade.</p>
+          </div>
+          <div class="infra-card reveal delay-1">
+            <div class="infra-icon">⚖️</div>
+            <h3>Recurso à JARI</h3>
+            <p>Junta Administrativa de Recursos de Infrações. Segunda instância do processo administrativo, com análise colegiada da infração contestada.</p>
+          </div>
+          <div class="infra-card reveal delay-2">
+            <div class="infra-icon">🏛️</div>
+            <h3>Recurso ao CETRAN / CONTRAN</h3>
+            <p>Instância recursal máxima do sistema administrativo de trânsito. Atendemos recursos em nível estadual e federal.</p>
+          </div>
+          <div class="infra-card reveal delay-3">
+            <div class="infra-icon">🪪</div>
+            <h3>Defesa de Suspensão de CNH</h3>
+            <p>Elaboramos recursos específicos para evitar a suspensão do direito de dirigir por excesso de pontos ou infrações gravíssimas.</p>
+          </div>
+          <div class="infra-card reveal">
+            <div class="infra-icon">📷</div>
+            <h3>Radares e Lombadas Eletrônicas</h3>
+            <p>Verificamos a validade e calibração dos equipamentos de medição e eventuais vícios na lavratura do auto de infração.</p>
+          </div>
+          <div class="infra-card reveal delay-1">
+            <div class="infra-icon">🚛</div>
+            <h3>Frotas e Pessoa Jurídica</h3>
+            <p>Gerenciamento e defesa de multas para empresas, frotas comerciais e transportadoras com alto volume de infrações.</p>
+          </div>
         </div>
       </div>
     </section>
 
-    <section id="compliance" class="section">
+    <!-- VANTAGENS -->
+    <section id="vantagens" class="section">
       <div class="container">
         <div class="section-head reveal">
-          <span class="eyebrow">COMPROMISSO COM PRIVACIDADE</span>
-          <h2>Site com base documental para uma operação mais séria.</h2>
-          <p>
-            Esta versão inclui páginas de Política de Privacidade, Termos de Uso e página LGPD, além de aviso de cookies e canal de contato para demandas relacionadas a dados pessoais.
-          </p>
+          <span class="eyebrow">Por que escolher a EiMultas</span>
+          <h2>Vantagens concretas para quem busca resultado</h2>
         </div>
-
-        <div class="cards">
-          <a href="pages/politica-de-privacidade.html" class="card card-link reveal">
-            <h3>Política de Privacidade</h3>
-            <p>
-              A Política de Privacidade da EiMultas descreve como tratamos informações relacionadas ao uso deste site e aos canais de contato institucionais.
-            </p>
-            <p>
-              No contexto do site, podem ser tratados dados fornecidos voluntariamente pelo usuário em interações via WhatsApp ou outros canais de comunicação, como nome, telefone e conteúdo da mensagem.
-            </p>
-            <p>
-              O documento também explica as finalidades do tratamento, as bases legais aplicáveis conforme a Lei Geral de Proteção de Dados (LGPD) e os direitos do titular de dados.
-            </p>
-          </a>
-
-          <a href="pages/termos-de-uso.html" class="card card-link reveal delay-1">
-            <h3>Termos de Uso</h3>
-            <p>
-              Os Termos de Uso estabelecem as condições gerais para navegação e utilização do site institucional da EiMultas.
-            </p>
-            <p>
-              Este documento define a natureza informacional do conteúdo disponibilizado, as responsabilidades relacionadas ao uso do site e as limitações aplicáveis aos serviços apresentados.
-            </p>
-            <p>
-              Ao acessar o site, o usuário declara estar ciente destas condições e compromete-se a utilizar o ambiente digital de forma lícita, ética e compatível com a legislação aplicável.
-            </p>
-          </a>
-
-          <a href="pages/lgpd.html" class="card card-link reveal delay-2">
-            <h3>Página LGPD</h3>
-            <p>
-              A página LGPD da EiMultas centraliza orientações relacionadas à privacidade e à proteção de dados pessoais.
-            </p>
-            <p>
-              Por meio desse canal, titulares de dados podem encaminhar solicitações relacionadas aos direitos previstos na Lei Geral de Proteção de Dados, incluindo confirmação de tratamento, acesso a informações, correção de dados ou esclarecimentos sobre compartilhamento.
-            </p>
-            <p>
-              Esse canal foi criado para facilitar a comunicação e reforçar a transparência das práticas de privacidade adotadas pela empresa.
-            </p>
-          </a>
-
-          <a href="pages/politica-de-privacidade.html" class="card card-link reveal">
-            <h3>Cookies</h3>
-            <p>
-              Este site utiliza cookies essenciais para garantir o funcionamento adequado da navegação e registrar preferências básicas do usuário.
-            </p>
-            <p>
-              Os cookies ajudam a melhorar a experiência de uso, permitindo que determinadas funcionalidades operem corretamente durante o acesso.
-            </p>
-            <p>
-              O usuário pode gerenciar ou excluir cookies diretamente nas configurações do navegador, conforme sua preferência.
-            </p>
-          </a>
+        <div class="vant-grid">
+          <div class="vant-card reveal">
+            <div class="vant-bullet">🎯</div>
+            <div>
+              <h3>Análise Gratuita</h3>
+              <p>Avaliamos sua multa sem custo antes de qualquer compromisso. Você só avança se houver base legal sólida para o recurso.</p>
+            </div>
+          </div>
+          <div class="vant-card reveal delay-1">
+            <div class="vant-bullet">⏱️</div>
+            <div>
+              <h3>Controle de Prazos</h3>
+              <p>Monitoramos todos os prazos recursais automaticamente. Nenhuma oportunidade de defesa é perdida por atraso.</p>
+            </div>
+          </div>
+          <div class="vant-card reveal delay-2">
+            <div class="vant-bullet">📑</div>
+            <div>
+              <h3>Fundamentação Técnica</h3>
+              <p>Cada recurso é elaborado com base no CTB, resoluções do CONTRAN e jurisprudência administrativa atualizada.</p>
+            </div>
+          </div>
+          <div class="vant-card reveal delay-3">
+            <div class="vant-bullet">💬</div>
+            <div>
+              <h3>Atendimento Personalizado</h3>
+              <p>Você tem um canal direto para acompanhar seu processo e tirar dúvidas a qualquer momento.</p>
+            </div>
+          </div>
+          <div class="vant-card reveal">
+            <div class="vant-bullet">🔒</div>
+            <div>
+              <h3>Sigilo e Privacidade</h3>
+              <p>Seus dados e documentos são tratados com total confidencialidade, em conformidade com a LGPD.</p>
+            </div>
+          </div>
+          <div class="vant-card reveal delay-1">
+            <div class="vant-bullet">🏆</div>
+            <div>
+              <h3>Especialistas no Assunto</h3>
+              <p>Foco exclusivo em recursos de multas de trânsito. Profundidade técnica que assessorias generalistas não alcançam.</p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
-    <section class="section">
-      <div class="container cta-box reveal">
-        <div>
-          <span class="eyebrow">MENSAGEM DIRETA</span>
-          <h2>Otimize seus dados e obtenha a maior performance possível.</h2>
-          <p>
-            A EiMultas é referência em enriquecimento de dados para setores de recursos de multas, solicite seu orçamento através do What'sApp e transforme a sua empresa.
-          </p>
+    <!-- FAQ -->
+    <section id="faq" class="section section-dark">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">Dúvidas Frequentes</span>
+          <h2>Perguntas que todo motorista faz</h2>
         </div>
-        <a class="btn btn-primary btn-large" href="https://wa.me/5549999440002?text=Olá%2C+quero+ver+uma+demonstração+da+EiMultas." target="_blank" rel="noopener">
-          Chamar no WhatsApp
+        <div class="faq-list reveal">
+          <div class="faq-item">
+            <button class="faq-q">
+              Vale a pena recorrer de uma multa de trânsito?
+              <span class="faq-chevron">▼</span>
+            </button>
+            <div class="faq-a">
+              <p>Na maioria dos casos, sim. Muitas multas possuem vícios formais, erros de medição ou falhas processuais que podem resultar em cancelamento. Mesmo sem cancelamento, o recurso posterga a penalidade e pode evitar a suspensão da CNH. A análise gratuita da EiMultas permite avaliar as chances reais antes de qualquer decisão.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q">
+              Qual é o prazo para entrar com recurso?
+              <span class="faq-chevron">▼</span>
+            </button>
+            <div class="faq-a">
+              <p>O prazo varia conforme a instância recursal. A defesa prévia deve ser apresentada em até 30 dias da data da notificação da autuação. O recurso à JARI pode ser interposto em até 30 dias da notificação da penalidade. Não perca tempo — entre em contato com a EiMultas assim que receber a notificação.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q">
+              O recurso suspende a penalidade?
+              <span class="faq-chevron">▼</span>
+            </button>
+            <div class="faq-a">
+              <p>Sim. Em regra, a interposição de recurso administrativo suspende a exigibilidade da multa e a aplicação dos pontos na CNH até o julgamento final. Isso significa que enquanto o recurso estiver em andamento, a penalidade não produz efeitos — como a suspensão do direito de dirigir por pontuação.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q">
+              Como funciona o atendimento para frotas?
+              <span class="faq-chevron">▼</span>
+            </button>
+            <div class="faq-a">
+              <p>Para empresas e frotas, oferecemos um serviço estruturado de gestão de recursos, com triagem de infrações, análise em lote, controle de prazos e relatórios periódicos. Entre em contato para apresentarmos uma proposta personalizada ao volume e perfil da sua frota.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q">
+              Posso recorrer de multas de outros estados?
+              <span class="faq-chevron">▼</span>
+            </button>
+            <div class="faq-a">
+              <p>Sim. Atendemos infrações registradas em qualquer estado brasileiro. O processo recursal segue o CTB, legislação federal, portanto os procedimentos são semelhantes em todo o país. Basta nos enviar os dados da multa independentemente de onde foi registrada.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA FINAL -->
+    <section class="cta-section">
+      <div class="container" style="position:relative;z-index:1;">
+        <span class="eyebrow">Comece agora — é gratuito</span>
+        <h2>Não pague uma multa<br/>que pode ser <em>cancelada.</em></h2>
+        <p>Nossa análise inicial é gratuita e sem compromisso. Em poucos minutos você sabe se vale a pena recorrer.</p>
+        <div class="cta-buttons">
+          <a class="btn btn-primary btn-lg" href="https://wa.me/5549935181609?text=Olá%2C+quero+analisar+minha+multa+gratuitamente." target="_blank" rel="noopener">
+            💬 Analisar pelo WhatsApp
+          </a>
+          <a class="btn btn-secondary" href="tel:+554935181609">
+            📞 (49) 3518-1609
+          </a>
+        </div>
+        <a class="phone-highlight" href="tel:+554935181609">
+          📞 +55 49 3518-1609 — Atendimento direto
         </a>
       </div>
     </section>
   </main>
 
+  <!-- FOOTER -->
   <footer class="site-footer">
-    <div class="container footer-grid">
-      <div>
-        <img class="footer-logo" src="assets/logo.png" alt="EiMultas" />
-        <p>Assessoria especializada em enriquecimento de dados.</p>
-        <p class="small-note">A EiMultas respeita a Lei Geral de Proteção de Dados Pessoais (Lei nº 13.709/2018).</p>
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <img class="footer-logo" src="assets/logo.png" alt="EiMultas" />
+          <p class="footer-tagline">
+            Especialistas em recursos de multas de trânsito. Defendemos seus direitos com base legal sólida, agilidade e transparência.
+          </p>
+          <br/>
+          <span class="footer-badge">⚖️ Conformidade LGPD</span>
+        </div>
+        <div>
+          <h4>Serviços</h4>
+          <a href="#recursos">Defesa de Autuação</a>
+          <a href="#recursos">Recurso à JARI</a>
+          <a href="#recursos">Recurso ao CETRAN</a>
+          <a href="#recursos">Suspensão de CNH</a>
+          <a href="#recursos">Frotas e PJ</a>
+        </div>
+        <div>
+          <h4>Contato</h4>
+          <a href="tel:+554935181609">📞 (49) 3518-1609</a>
+          <a href="https://wa.me/5549935181609" target="_blank" rel="noopener">💬 WhatsApp</a>
+          <br/>
+          <h4>Legal</h4>
+          <a href="pages/politica-de-privacidade.html">Política de Privacidade</a>
+          <a href="pages/termos-de-uso.html">Termos de Uso</a>
+          <a href="pages/lgpd.html">Canal LGPD</a>
+        </div>
       </div>
-      <div>
-        <h4>Institucional</h4>
-        <p><a href="pages/politica-de-privacidade.html">Política de Privacidade</a></p>
-        <p><a href="pages/termos-de-uso.html">Termos de Uso</a></p>
-        <p><a href="pages/lgpd.html">Canal LGPD</a></p>
-        <p><a href="https://wa.me/5549999440002" target="_blank" rel="noopener">WhatsApp: +55 49 99944-0002</a></p>
+      <div class="footer-bottom">
+        <span>© 2025 EiMultas — Todos os direitos reservados</span>
+        <span>Operação em conformidade com a Lei nº 13.709/2018 (LGPD)</span>
       </div>
     </div>
   </footer>
 
-  <div id="cookie-banner" class="cookie-banner" hidden>
-    <div class="cookie-content">
-      <div>
-        <strong>Privacidade e cookies</strong>
-        <p>Utilizamos cookies essenciais e recursos básicos para melhorar a navegação. Ao continuar, você concorda com esse uso conforme nossa Política de Privacidade.</p>
-      </div>
-      <div class="cookie-actions">
-        <a class="btn btn-secondary btn-small" href="pages/politica-de-privacidade.html">Ler política</a>
-        <button id="cookie-accept" class="btn btn-primary btn-small" type="button">Aceitar</button>
-      </div>
+  <!-- WA FLOAT -->
+  <a class="wa-float" href="https://wa.me/5549935181609?text=Olá%2C+quero+falar+com+a+EiMultas." target="_blank" rel="noopener" aria-label="Falar no WhatsApp">
+    <span class="wa-icon">💬</span>
+    WhatsApp
+  </a>
+
+  <!-- COOKIE BANNER -->
+  <div class="cookie-bar" id="cookieBar">
+    <p>Utilizamos cookies essenciais para melhorar a navegação. Ao continuar, você concorda com nossa <a href="pages/politica-de-privacidade.html">Política de Privacidade</a>.</p>
+    <div style="display:flex;gap:10px;flex-shrink:0;">
+      <a class="btn btn-outline" href="pages/politica-de-privacidade.html" style="padding:9px 18px;font-size:.8rem;">Ler política</a>
+      <button onclick="document.getElementById('cookieBar').classList.add('hidden');localStorage.setItem('ck','1');" class="btn btn-primary" style="padding:9px 18px;font-size:.8rem;">Aceitar</button>
     </div>
   </div>
 
-  <a class="whatsapp-float" href="https://wa.me/5549999440002?text=Olá%2C+quero+falar+com+a+EiMultas." target="_blank" rel="noopener" aria-label="Falar no WhatsApp">
-    <span>WhatsApp</span>
-  </a>
+  <script>
+    // Sticky header
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('scrolled', window.scrollY > 40);
+    });
 
-  <script src="script.js"></script>
+    // Mobile menu
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks   = document.getElementById('navLinks');
+    menuToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+    });
+    navLinks.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => navLinks.classList.remove('open'));
+    });
+
+    // Cookie banner
+    if (localStorage.getItem('ck') === '1') {
+      document.getElementById('cookieBar').classList.add('hidden');
+    }
+
+    // Reveal on scroll
+    const revealEls = document.querySelectorAll('.reveal');
+    const revealObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); } });
+    }, { threshold: 0.1 });
+    revealEls.forEach(el => revealObs.observe(el));
+
+    // Counter animation
+    function animateCounter(el, target, suffix = '', prefix = '') {
+      const duration = 1800;
+      const start = performance.now();
+      const update = (now) => {
+        const t = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - t, 3);
+        el.textContent = prefix + Math.floor(eased * target).toLocaleString('pt-BR') + suffix;
+        if (t < 1) requestAnimationFrame(update);
+      };
+      requestAnimationFrame(update);
+    }
+
+    // Trigger counters
+    const statEls = document.querySelectorAll('[data-target]');
+    const counterObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          const el = e.target;
+          animateCounter(el, +el.dataset.target, el.dataset.suffix || '', el.dataset.prefix || '');
+          counterObs.unobserve(el);
+        }
+      });
+    }, { threshold: 0.4 });
+    statEls.forEach(el => counterObs.observe(el));
+
+    // Hero card counter
+    const heroCounter = document.getElementById('counterStat');
+    if (heroCounter) {
+      setTimeout(() => animateCounter(heroCounter, 3200), 600);
+      heroCounter.textContent = '3.200+';
+      heroCounter.style.fontSize = '3.2rem';
+    }
+
+    // FAQ accordion
+    document.querySelectorAll('.faq-q').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.parentElement;
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+        if (!isOpen) item.classList.add('open');
+      });
+    });
+  </script>
 </body>
 </html>
