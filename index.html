@@ -5,44 +5,51 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>EiMultas | Especialistas em Recursos de Multas de Trânsito</title>
   <meta name="description" content="A EiMultas é especialista em recursos de multas de trânsito. Reduza ou elimine suas multas com quem realmente entende da lei." />
-  <meta name="theme-color" content="#0b4f8a" />
+  <meta name="theme-color" content="#ffffff" />
   <link rel="icon" href="assets/favicon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
   <style>
+    body {
+      background-color: #ffffff;
+      color: #07192e;
+    }
     .hero-copy h1 {
       font-family: 'Inter', sans-serif;
       font-size: clamp(2.6rem, 5vw, 4.2rem);
       font-weight: 800;
       line-height: 1.07;
       letter-spacing: -.025em;
-      color: #ffffff;
+      color: #07192e; /* Alterado de branco para azul escuro */
       margin-bottom: 20px;
     }
     .hero-copy h1 em { font-style: normal; color: #f5820a; }
     .proof-icon {
       width: 36px; height: 36px; border-radius: 50%;
-      background: rgba(255,255,255,.1);
+      background: rgba(0,0,0,.05); /* Fundo sutil mais escuro */
       display: flex; align-items: center; justify-content: center;
       font-size: 1rem; flex-shrink: 0;
     }
     .proof-item { display: flex; align-items: flex-start; gap: 12px; }
-    .proof-item strong { display: block; color: #fff; font-size: .88rem; font-weight: 600; }
-    .proof-item span   { color: rgba(255,255,255,.55); font-size: .78rem; }
-    .section-navy { background: #07192e; color: #fff; }
+    .proof-item strong { display: block; color: #07192e; font-size: .88rem; font-weight: 600; }
+    .proof-item span   { color: #555555; font-size: .78rem; }
+    
+    /* Seções que eram escuras agora são brancas */
+    .section-navy, .section-dark { background: #ffffff; color: #07192e; }
+    
     .stats-row {
       display: grid; grid-template-columns: repeat(3,1fr);
-      gap: 1px; background: rgba(255,255,255,.1);
+      gap: 1px; background: #e2eaf3; /* Linhas de grade cinza claro */
       border-radius: 16px; overflow: hidden;
     }
-    .stat-block { background: #0b3050; padding: 48px 32px; text-align: center; }
+    .stat-block { background: #ffffff; padding: 48px 32px; text-align: center; }
     .stat-value {
       font-size: 3.4rem; font-weight: 800; line-height: 1;
       color: #f5820a; margin-bottom: 8px;
     }
-    .stat-label { color: rgba(255,255,255,.6); font-size: .9rem; }
+    .stat-label { color: #555555; font-size: .9rem; }
     .recursos-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
     .recurso-card {
       background: #fff; border: 1.5px solid #e2eaf3;
@@ -53,6 +60,7 @@
       width: 48px; height: 48px; border-radius: 12px;
       background: linear-gradient(135deg,#0b4f8a,#1a78c2);
       display: flex; align-items: center; justify-content: center;
+      color: #fff;
       font-size: 1.3rem; margin-bottom: 16px;
     }
     .recurso-card h3 { font-size: 1rem; font-weight: 700; color: #07192e; margin-bottom: 8px; }
@@ -76,30 +84,33 @@
     .faq-body { max-height: 0; overflow: hidden; transition: max-height .38s ease; }
     .faq-item.open .faq-body { max-height: 260px; }
     .faq-body p { padding-bottom: 22px; color: #8a9ab0; font-size: .9rem; line-height: 1.7; }
+    
+    /* CTA Final alterado para fundo branco */
     .cta-final {
-      background: linear-gradient(140deg, #07192e 0%, #0b3d6b 60%, #0d4a80 100%);
+      background: #ffffff;
       padding: 96px 0; text-align: center; position: relative; overflow: hidden;
+      border-top: 1px solid #e2eaf3;
     }
     .cta-final::before {
       content: ''; position: absolute; top: -200px; left: 50%;
       transform: translateX(-50%); width: 700px; height: 500px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(26,120,194,.2) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(26,120,194,.1) 0%, transparent 70%);
     }
     .cta-final h2 {
       font-size: clamp(1.9rem, 3.5vw, 3rem); font-weight: 800;
-      color: #fff; line-height: 1.15; letter-spacing: -.02em; margin-bottom: 16px;
+      color: #07192e; line-height: 1.15; letter-spacing: -.02em; margin-bottom: 16px;
     }
-    .cta-final p { color: rgba(255,255,255,.65); font-size: 1rem; max-width: 500px; margin: 0 auto 36px; }
+    .cta-final p { color: #555555; font-size: 1rem; max-width: 500px; margin: 0 auto 36px; }
     .cta-final-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
     .cta-phone {
       display: inline-flex; align-items: center; gap: 8px; margin-top: 24px;
-      background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.18);
+      background: #f4f6f9; border: 1px solid #e2eaf3;
       border-radius: 50px; padding: 10px 22px;
-      color: #fff; font-weight: 600; font-size: .95rem;
+      color: #07192e; font-weight: 600; font-size: .95rem;
       text-decoration: none; transition: background .2s;
     }
-    .cta-phone:hover { background: rgba(255,255,255,.16); }
+    .cta-phone:hover { background: #e2eaf3; }
     .whatsapp-float {
       position: fixed; bottom: 26px; right: 26px; z-index: 99;
       background: #25D366; color: #fff;
@@ -148,7 +159,7 @@
         <div class="hero-copy reveal">
           <span class="eyebrow">ESPECIALISTAS EM RECURSOS DE MULTAS DE TRÂNSITO</span>
           <h1>Sua multa pode ser <em>reduzida ou cancelada.</em></h1>
-          <p class="lead">
+          <p class="lead" style="color: #555555;">
             A EiMultas analisa cada infração com critério técnico e jurídico. Defendemos seus direitos com agilidade, seriedade e resultados reais.
           </p>
           <div class="hero-actions">
@@ -174,18 +185,18 @@
         </div>
 
         <div class="hero-card reveal delay-1">
-          <div class="glass-panel">
-            <div class="stat-header">
+          <div class="glass-panel" style="background: #ffffff; border: 1px solid #e2eaf3;">
+            <div class="stat-header" style="color: #07192e;">
               <span class="dot"></span>
               <span>Operação em andamento</span>
             </div>
             <div class="stat-number" data-counter="3200">0</div>
-            <div class="stat-caption">Recursos de multas elaborados com sucesso</div>
+            <div class="stat-caption" style="color: #555555;">Recursos de multas elaborados com sucesso</div>
             <div class="mini-grid">
-              <div class="mini-card"><span>Instâncias</span><strong>JARI / CETRAN</strong></div>
-              <div class="mini-card"><span>Postura</span><strong>Técnica e jurídica</strong></div>
-              <div class="mini-card"><span>Resultado</span><strong>87% de deferimento</strong></div>
-              <div class="mini-card"><span>Atendimento</span><strong>Direto e rápido</strong></div>
+              <div class="mini-card" style="color: #07192e;"><span>Instâncias</span><strong>JARI / CETRAN</strong></div>
+              <div class="mini-card" style="color: #07192e;"><span>Postura</span><strong>Técnica e jurídica</strong></div>
+              <div class="mini-card" style="color: #07192e;"><span>Resultado</span><strong>87% de deferimento</strong></div>
+              <div class="mini-card" style="color: #07192e;"><span>Atendimento</span><strong>Direto e rápido</strong></div>
             </div>
           </div>
         </div>
@@ -193,7 +204,7 @@
     </section>
 
     <section class="logos-strip reveal">
-      <div class="container strip">
+      <div class="container strip" style="color: #07192e;">
         <span>Defesa de Autuação</span>
         <span>JARI</span>
         <span>CETRAN</span>
@@ -234,7 +245,7 @@
       <div class="container">
         <div class="section-head reveal" style="margin-bottom:48px;">
           <span class="eyebrow">NOSSOS NÚMEROS</span>
-          <h2 style="color:#fff;">Resultados que comprovam nossa expertise</h2>
+          <h2 style="color:#07192e;">Resultados que comprovam nossa expertise</h2>
         </div>
         <div class="stats-row reveal">
           <div class="stat-block">
@@ -302,21 +313,21 @@
           <h2>Por que escolher a EiMultas</h2>
         </div>
         <div class="cards">
-          <article class="card reveal">
-            <h3>Análise gratuita</h3>
-            <p>Avaliamos sua multa sem custo antes de qualquer compromisso. Você avança apenas se houver base legal sólida.</p>
+          <article class="card reveal" style="border: 1px solid #e2eaf3;">
+            <h3 style="color: #07192e;">Análise gratuita</h3>
+            <p style="color: #555555;">Avaliamos sua multa sem custo antes de qualquer compromisso. Você avança apenas se houver base legal sólida.</p>
           </article>
-          <article class="card reveal delay-1">
-            <h3>Controle de prazos</h3>
-            <p>Monitoramos todos os prazos recursais. Nenhuma oportunidade de defesa é perdida por atraso.</p>
+          <article class="card reveal delay-1" style="border: 1px solid #e2eaf3;">
+            <h3 style="color: #07192e;">Controle de prazos</h3>
+            <p style="color: #555555;">Monitoramos todos os prazos recursais. Nenhuma oportunidade de defesa é perdida por atraso.</p>
           </article>
-          <article class="card reveal delay-2">
-            <h3>Fundamentação técnica</h3>
-            <p>Cada recurso é elaborado com base no CTB, resoluções do CONTRAN e jurisprudência administrativa.</p>
+          <article class="card reveal delay-2" style="border: 1px solid #e2eaf3;">
+            <h3 style="color: #07192e;">Fundamentação técnica</h3>
+            <p style="color: #555555;">Cada recurso é elaborado com base no CTB, resoluções do CONTRAN e jurisprudência administrativa.</p>
           </article>
-          <article class="card reveal">
-            <h3>Especialistas no assunto</h3>
-            <p>Foco exclusivo em multas de trânsito. Profundidade que assessorias generalistas não alcançam.</p>
+          <article class="card reveal" style="border: 1px solid #e2eaf3;">
+            <h3 style="color: #07192e;">Especialistas no assunto</h3>
+            <p style="color: #555555;">Foco exclusivo em multas de trânsito. Profundidade que assessorias generalistas não alcançam.</p>
           </article>
         </div>
       </div>
@@ -330,21 +341,21 @@
           <p>Nosso site inclui Política de Privacidade, Termos de Uso e página LGPD, além de aviso de cookies e canal de contato para demandas de dados pessoais.</p>
         </div>
         <div class="cards">
-          <a href="pages/politica-de-privacidade.html" class="card card-link reveal">
-            <h3>Política de Privacidade</h3>
-            <p>Descreve como tratamos informações relacionadas ao uso deste site e aos canais de contato institucionais, com bases legais conforme a LGPD.</p>
+          <a href="pages/politica-de-privacidade.html" class="card card-link reveal" style="border: 1px solid #e2eaf3;">
+            <h3 style="color: #07192e;">Política de Privacidade</h3>
+            <p style="color: #555555;">Descreve como tratamos informações relacionadas ao uso deste site e aos canais de contato institucionais, com bases legais conforme a LGPD.</p>
           </a>
-          <a href="pages/termos-de-uso.html" class="card card-link reveal delay-1">
-            <h3>Termos de Uso</h3>
-            <p>Estabelece as condições gerais para navegação e utilização do site, definindo responsabilidades e limitações aplicáveis.</p>
+          <a href="pages/termos-de-uso.html" class="card card-link reveal delay-1" style="border: 1px solid #e2eaf3;">
+            <h3 style="color: #07192e;">Termos de Uso</h3>
+            <p style="color: #555555;">Estabelece as condições gerais para navegação e utilização do site, definindo responsabilidades e limitações aplicáveis.</p>
           </a>
-          <a href="pages/lgpd.html" class="card card-link reveal delay-2">
-            <h3>Canal LGPD</h3>
-            <p>Titulares de dados podem encaminhar solicitações de acesso, correção ou esclarecimentos sobre o tratamento de informações pessoais.</p>
+          <a href="pages/lgpd.html" class="card card-link reveal delay-2" style="border: 1px solid #e2eaf3;">
+            <h3 style="color: #07192e;">Canal LGPD</h3>
+            <p style="color: #555555;">Titulares de dados podem encaminhar solicitações de acesso, correção ou esclarecimentos sobre o tratamento de informações pessoais.</p>
           </a>
-          <a href="pages/politica-de-privacidade.html" class="card card-link reveal">
-            <h3>Cookies</h3>
-            <p>Utilizamos apenas cookies essenciais. O usuário pode gerenciá-los diretamente nas configurações do navegador.</p>
+          <a href="pages/politica-de-privacidade.html" class="card card-link reveal" style="border: 1px solid #e2eaf3;">
+            <h3 style="color: #07192e;">Cookies</h3>
+            <p style="color: #555555;">Utilizamos apenas cookies essenciais. O usuário pode gerenciá-los diretamente nas configurações do navegador.</p>
           </a>
         </div>
       </div>
@@ -399,23 +410,23 @@
 
   </main>
 
-  <footer class="site-footer">
+  <footer class="site-footer" style="background: #ffffff; color: #07192e; border-top: 1px solid #e2eaf3; padding: 40px 0;">
     <div class="container footer-grid">
       <div>
         <img class="footer-logo" src="assets/logo.png" alt="EiMultas" />
-        <p>Especialistas em recursos de multas de trânsito.</p>
-        <p class="small-note">A EiMultas respeita a Lei Geral de Proteção de Dados Pessoais (Lei nº 13.709/2018).</p>
+        <p style="color: #555555;">Especialistas em recursos de multas de trânsito.</p>
+        <p class="small-note" style="color: #888888;">A EiMultas respeita a Lei Geral de Proteção de Dados Pessoais (Lei nº 13.709/2018).</p>
       </div>
       <div>
         <h4>Contato</h4>
-        <p><a href="tel:+554935181609">📞 (49) 3518-1609</a></p>
-        <p><a href="https://wa.me/554935181609" target="_blank" rel="noopener">💬 WhatsApp</a></p>
+        <p><a href="tel:+554935181609" style="color: #07192e;">📞 (49) 3518-1609</a></p>
+        <p><a href="https://wa.me/554935181609" target="_blank" rel="noopener" style="color: #07192e;">💬 WhatsApp</a></p>
       </div>
       <div>
         <h4>Institucional</h4>
-        <p><a href="pages/politica-de-privacidade.html">Política de Privacidade</a></p>
-        <p><a href="pages/termos-de-uso.html">Termos de Uso</a></p>
-        <p><a href="pages/lgpd.html">Canal LGPD</a></p>
+        <p><a href="pages/politica-de-privacidade.html" style="color: #07192e;">Política de Privacidade</a></p>
+        <p><a href="pages/termos-de-uso.html" style="color: #07192e;">Termos de Uso</a></p>
+        <p><a href="pages/lgpd.html" style="color: #07192e;">Canal LGPD</a></p>
       </div>
     </div>
   </footer>
